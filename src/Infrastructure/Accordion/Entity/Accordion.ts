@@ -3,8 +3,8 @@ import WrongFormatAccordionException from '../Exceptions/WrongFormatAccordionExc
 import NodeGivenDoesNotExistAccordionException from "../Exceptions/NodeGivenDoesNotExistAccordionException";
 
 export default class Accordion {
-  static CLASS_TAB = 'Accordion-sectionHeader';
-  static CLASS_TAB_CONTENT = 'Accordion-sectionBody';
+  static CLASS_TAB = 'Accordion-tab';
+  static CLASS_TAB_CONTENT = 'Accordion-tabContent';
   static CLASS_TAB_EXPANDED = 'is-expanded';
   static CLASS_TAB_SELECTED = 'is-selected';
   static CLASS_UTILITY_NONE = 'u-none';

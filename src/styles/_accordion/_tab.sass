@@ -1,4 +1,5 @@
 $accordionTab: Accordion-tab
+$accordionTabIcon: Accordion-tabIcon
 $accordionTab-bg-color: $color-main-color
 $accordionTab-color: $color-white
 $accordionTab-border-color: darken($color-main-color, 20%)
@@ -13,6 +14,9 @@ $accordionTab-bg-color-focus: yellow
   font-weight: $font-weight-l
   font-size: $font-size-m
   border-top: 1px solid $accordionTab-border-color
+
+  .#{$accordionTabIcon}
+    margin-right: 10px
 
   &:focus
     outline-color: $accordionTab-bg-color-focus

@@ -3,11 +3,11 @@ import WrongFormatAccordionException from '../Exceptions/WrongFormatAccordionExc
 import NodeGivenDoesNotExistAccordionException from "../Exceptions/NodeGivenDoesNotExistAccordionException";
 
 export default class Accordion {
-  static CLASS_TAB = 'Accordion-tab';
-  static CLASS_TAB_CONTENT = 'Accordion-tabContent';
-  static CLASS_TAB_EXPANDED = 'is-expanded';
-  static CLASS_TAB_SELECTED = 'is-selected';
-  static CLASS_UTILITY_NONE = 'u-none';
+  private CLASS_TAB = 'Accordion-tab';
+  private CLASS_TAB_CONTENT = 'Accordion-tabContent';
+  private CLASS_TAB_EXPANDED = 'is-expanded';
+  private CLASS_TAB_SELECTED = 'is-selected';
+  private CLASS_UTILITY_NONE = 'u-none';
 
   private root: any;
   private tabs: Array<any>;
@@ -26,7 +26,7 @@ export default class Accordion {
       throw new WrongFormatAccordionException()
     }
 
-    this.subscribeTabs(this.tabs);
+    this.subscribeTabs();
   }
 
   static CreateFromElementId(elementId: string) {
@@ -47,13 +47,8 @@ export default class Accordion {
     return accordions;
   }
 
-  destroy() {
-    // TODO
-    console.log('destroying');
-  }
-
   private getTabs() {
-    const htmlCollection = this.root.getElementsByClassName(Accordion.CLASS_TAB);
+    const htmlCollection = this.root.getElementsByClassName(this.CLASS_TAB);
 
     let foo = [];
     foo.push(...htmlCollection);
@@ -62,7 +57,7 @@ export default class Accordion {
   }
 
   private getTabsContent() {
-    const htmlCollection = this.root.getElementsByClassName(Accordion.CLASS_TAB_CONTENT);
+    const htmlCollection = this.root.getElementsByClassName(this.CLASS_TAB_CONTENT);
 
     let foo = [];
     foo.push(...htmlCollection);
@@ -70,95 +65,105 @@ export default class Accordion {
     return foo;
   }
 
-  private subscribeTabs(tabs : Array<any>) {
-    tabs.map((tab: any, index: number) => {
-      tab.addEventListener(
-        'click',
-        (event: MouseEvent) => this.handleClick(event, index)
-      );
-      tab.addEventListener(
-        'keyup',
-        (event: KeyboardEvent) => this.handleOnKeypUp(event, index)
-      );
-      tab.addEventListener(
-        'focus',
-        (event: FocusEvent) => this.handleFocus(event, index)
-      );
-      tab.addEventListener(
-        'blur',
-        (event: any) => this.handleBlur(event, index)
-      );
-    });
+  private subscribeTabs() {
+
+    this.root.addEventListener(
+      'click',
+      (event: MouseEvent) => this.handleClick(event)
+    );
+    this.root.addEventListener(
+      'keyup',
+      (event: KeyboardEvent) => this.handleOnKeypUp(event)
+    );
+    this.root.addEventListener(
+      'focus',
+      (event: FocusEvent) => this.handleFocus(event)
+    );
+    this.root.addEventListener(
+      'blur',
+      (event: any) => this.handleBlur(event)
+    );
   }
 
-  private handleClick(event: MouseEvent, index: number) {
-    const tabContent = this.tabsContent[index];
+  private handleClick(event: MouseEvent) {
+    const tab = event.target;
+    if (!tab.matches(`.${this.CLASS_TAB}`)) {
+      return;
+    }
 
-    if (tabContent.classList.contains(Accordion.CLASS_TAB_EXPANDED)) {
-      this.closeTab(index);
+    const ariaControlledAtr= tab.getAttribute('aria-controls');
+    const tabContent = document.getElementById(ariaControlledAtr);
+
+    if (tabContent.classList.contains(this.CLASS_TAB_EXPANDED)) {
+      this.closeTab(tab.id);
       return;
     }
 
     if (this.isAnyTabExpanded()) {
-      this.getTabsContent().map((tab, index) => {
-        this.closeTab(index);
+      this.getTabs().map(tab => {
+        this.closeTab(tab.id);
       });
     }
 
-    this.openTab(index);
+    this.openTab(tab.id);
   }
 
-  private handleOnKeypUp(event: KeyboardEvent, index: number) {
+  private handleOnKeypUp(event: KeyboardEvent) {
     if (event.keyCode !== 13) { return; }
 
-    const tabContent = this.tabsContent[index];
-    if (tabContent.classList.contains(Accordion.CLASS_TAB_EXPANDED)) {
-      this.closeTab(index);
+    const tab = event.target;
+    const ariaControlledAtr = tab.getAttribute('aria-controls');
+    const tabContent = document.getElementById(ariaControlledAtr);
+
+    if (tabContent.classList.contains(this.CLASS_TAB_EXPANDED)) {
+      this.closeTab(tab.id);
       return;
     }
 
     if (this.isAnyTabExpanded()) {
-      this.getTabsContent().map((tab, index) => {
-        this.closeTab(index);
+      this.getTabs().map((tab, index) => {
+        this.closeTab(tab.id);
       });
     }
 
-    this.openTab(index);
+    this.openTab(tab.id);
   }
 
-  private handleFocus(event: FocusEvent, index: number) {
-    const tab = this.tabs[index];
+  private handleFocus(event: FocusEvent) {
+    const tab = event.target;
 
     tab.setAttribute('aria-selected', "true");
-    tab.classList.add(Accordion.CLASS_TAB_SELECTED);
+    tab.classList.add(this.CLASS_TAB_SELECTED);
   }
 
-  private handleBlur(event: FocusEvent, index: number) {
-    const tab = this.tabs[index];
+  private handleBlur(event: FocusEvent) {
+    const tab = event.target;
 
     tab.setAttribute('aria-selected', "false");
-    tab.classList.remove(Accordion.CLASS_TAB_SELECTED);
+    tab.classList.remove(this.CLASS_TAB_SELECTED);
   }
 
 
-  private openTab(index: number) {
-    const tab = this.tabs[index];
-    const tabContent = this.tabsContent[index];
+  private openTab(tabId: string) {
+    const tab = document.getElementById(tabId);
+    const ariaControlledAtr= tab.getAttribute('aria-controls');
+    const tabContent = document.getElementById(ariaControlledAtr);
 
-    tab.classList.add(Accordion.CLASS_TAB_EXPANDED);
-    tabContent.classList.add(Accordion.CLASS_TAB_EXPANDED);
-    tabContent.classList.remove(Accordion.CLASS_UTILITY_NONE);
+    tab.classList.add(this.CLASS_TAB_EXPANDED);
+    tabContent.classList.add(this.CLASS_TAB_EXPANDED);
+    tabContent.classList.remove(this.CLASS_UTILITY_NONE);
     tabContent.setAttribute('aria-hidden', "false");
     tabContent.setAttribute('aria-expanded', "true");
   }
 
-  private closeTab(index: number) {
-    const tab = this.tabs[index];
-    const tabContent = this.tabsContent[index];
+  private closeTab(tabId: string) {
+    const tab = document.getElementById(tabId);
+    const ariaControlledAtr= tab.getAttribute('aria-controls');
+    const tabContent = document.getElementById(ariaControlledAtr);
 
-    tab.classList.remove(Accordion.CLASS_TAB_EXPANDED);
-    tabContent.classList.remove(Accordion.CLASS_TAB_EXPANDED);
-    tabContent.classList.add(Accordion.CLASS_UTILITY_NONE);
+    tab.classList.remove(this.CLASS_TAB_EXPANDED);
+    tabContent.classList.remove(this.CLASS_TAB_EXPANDED);
+    tabContent.classList.add(this.CLASS_UTILITY_NONE);
     tabContent.setAttribute('aria-hidden', "true");
     tabContent.setAttribute('aria-expanded', "false");
   }
@@ -166,7 +171,7 @@ export default class Accordion {
   private getExpandedTabs() {
     return this.tabs.filter(
       (tab) =>
-        tab.classList.contains(Accordion.CLASS_TAB_EXPANDED)
+        tab.classList.contains(this.CLASS_TAB_EXPANDED)
     );
   }
 

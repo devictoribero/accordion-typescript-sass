@@ -2,76 +2,95 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
   <title>Accordion made with Typescript, Ecmascript 6 and SASS
     preprocessor</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+  <link rel="stylesheet"
+        href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+        integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+        crossorigin="anonymous">
+
 </head>
 
 <body>
-  <dl id="example1" class="Accordion Accordion--hasShadow u-oh" role="tablist">
-    <dt
-      class="Accordion-tab"
-      role="tab"
-      aria-selected="false"
-      id="accordion-section-header-1"
-      aria-controls="accordion-section-body-1"
-      tabindex="0"
-    >
-      Profile
-    </dt>
-    <dd
-      class="Accordion-tabContent u-none"
-      role="tabpanel"
-      aria-hidden="true"
-      aria-expanded="false"
-      aria-labelledby="accordion-section-header-1"
-    >
-      <p class="Accordion-tabContentParagraph">Section 1 Content...</p>
-    </dd>
+  <div id="example1-wrapper">
 
-    <dt
-      class="Accordion-tab"
-      role="tab"
-      aria-selected="false"
-      id="accordion-section-header-2"
-      aria-controls="accordion-section-body-2"
-      tabindex="0"
-    >
-      Messages
-    </dt>
-    <dd
-      class="Accordion-tabContent u-none"
-      role="tabpanel"
-      aria-hidden="true"
-      aria-expanded="false"
-      aria-labelledby="accordion-section-header-2"
-    >
-      <p class="Accordion-tabContentParagraph">Section 2 Content...</p>
-    </dd>
+    <dl id="example1" class="Accordion Accordion--hasShadow u-oh" role="tablist">
+      <dt
+        class="Accordion-tab"
+        role="tab"
+        aria-selected="false"
+        id="accordion-section-header-1"
+        aria-controls="accordion-section-body-1"
+        tabindex="0"
+      >
+        <i class="Accordion-tabIcon fas fa-home"></i>
+        Home
+      </dt>
+      <dd
+        class="Accordion-tabContent u-none"
+        role="tabpanel"
+        aria-hidden="true"
+        aria-expanded="false"
+        id="accordion-section-body-1"
+        aria-labelledby="accordion-section-header-1"
+      >
+        <p class="Accordion-tabContentParagraph">Section 1 Content...</p>
+      </dd>
 
-    <dt
-      class="Accordion-tab"
-      role="tab"
-      aria-selected="false"
-      id="accordion-section-header-3"
-      aria-controls="accordion-section-body-3"
-      tabindex="0"
-    >
-      Settings
-    </dt>
-    <dd
-      class="Accordion-tabContent u-none"
-      role="tabpanel"
-      aria-hidden="true"
-      aria-expanded="false"
-      aria-labelledby="accordion-section-header-3"
-    >
-      <p class="Accordion-tabContentParagraph">Section 3 Content...</p>
-    </dd>
+      <dt
+        class="Accordion-tab"
+        role="tab"
+        aria-selected="false"
+        id="accordion-section-header-2"
+        aria-controls="accordion-section-body-2"
+        tabindex="0"
+      >
+        <i class="Accordion-tabIcon fas fa-comments"></i>
+        Messages
+      </dt>
+      <dd
+        class="Accordion-tabContent u-none"
+        role="tabpanel"
+        aria-hidden="true"
+        aria-expanded="false"
+        id="accordion-section-body-2"
+        aria-labelledby="accordion-section-header-2"
+      >
+        <p class="Accordion-tabContentParagraph">Section 2 Content...</p>
+      </dd>
 
-  </dl>
+      <dt
+        class="Accordion-tab"
+        role="tab"
+        aria-selected="false"
+        id="accordion-section-header-3"
+        aria-controls="accordion-section-body-3"
+        tabindex="0"
+      >
+        <i class="Accordion-tabIcon fas fa-cogs"></i>
+        Settings
+      </dt>
+      <dd
+        class="Accordion-tabContent u-none"
+        role="tabpanel"
+        aria-hidden="true"
+        aria-expanded="false"
+        id="accordion-section-body-3"
+        aria-labelledby="accordion-section-header-3"
+      >
+        <p class="Accordion-tabContentParagraph">Section 3 Content...</p>
+      </dd>
 
-  <div id="app"></div>
+    </dl>
+  </div>
+
 </body>
 
 </html>

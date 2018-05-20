@@ -2,6 +2,7 @@ $accordionTab: Accordion-tab
 $accordionTab-bg-color: $color-main-color
 $accordionTab-color: $color-white
 $accordionTab-border-color: darken($color-main-color, 20%)
+$accordionTab-bg-color-focus: yellow
 
 .#{$accordionTab}
   position: relative
@@ -14,7 +15,7 @@ $accordionTab-border-color: darken($color-main-color, 20%)
   border-top: 1px solid $accordionTab-border-color
 
   &:focus
-    outline-color: $accordionTab-border-color
+    outline-color: $accordionTab-bg-color-focus
 
   &:hover
     cursor: pointer

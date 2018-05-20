@@ -11,7 +11,7 @@ export default class Accordion {
 
   private root: any;
   private tabs: Array<any>;
-  private tabsContent: HTMLCollection;
+  private tabsContent: Array<any>;
 
   constructor(rootNode: any) {
     if (!rootNode) {
@@ -62,11 +62,20 @@ export default class Accordion {
   }
 
   private getTabsContent() {
-    return this.root.getElementsByClassName(Accordion.CLASS_TAB_CONTENT);
+    const htmlCollection = this.root.getElementsByClassName(Accordion.CLASS_TAB_CONTENT);
+
+    let foo = [];
+    foo.push(...htmlCollection);
+
+    return foo;
   }
 
   private subscribeTabs(tabs : Array<any>) {
     tabs.map((tab: any, index: number) => {
+      tab.addEventListener(
+        'click',
+        (event: MouseEvent) => this.handleClick(event, index)
+      );
       tab.addEventListener(
         'keyup',
         (event: KeyboardEvent) => this.handleOnKeypUp(event, index)
@@ -74,10 +83,6 @@ export default class Accordion {
       tab.addEventListener(
         'focus',
         (event: FocusEvent) => this.handleFocus(event, index)
-      );
-      tab.addEventListener(
-        'click',
-        (event: MouseEvent) => this.handleClick(event, index)
       );
       tab.addEventListener(
         'blur',
@@ -95,10 +100,30 @@ export default class Accordion {
     }
 
     if (this.isAnyTabExpanded()) {
-      this.getExpandedTabs().map((tab, index) => this.closeTab(index))
+      this.getTabsContent().map((tab, index) => {
+        this.closeTab(index);
+      });
     }
 
-    this.openTab(index)
+    this.openTab(index);
+  }
+
+  private handleOnKeypUp(event: KeyboardEvent, index: number) {
+    if (event.keyCode !== 13) { return; }
+
+    const tabContent = this.tabsContent[index];
+    if (tabContent.classList.contains(Accordion.CLASS_TAB_EXPANDED)) {
+      this.closeTab(index);
+      return;
+    }
+
+    if (this.isAnyTabExpanded()) {
+      this.getTabsContent().map((tab, index) => {
+        this.closeTab(index);
+      });
+    }
+
+    this.openTab(index);
   }
 
   private handleFocus(event: FocusEvent, index: number) {
@@ -115,17 +140,6 @@ export default class Accordion {
     tab.classList.remove(Accordion.CLASS_TAB_SELECTED);
   }
 
-  private handleOnKeypUp(event: KeyboardEvent, index: number) {
-    if (event.keyCode !== 13) { return; }
-
-    const tabContent = this.tabsContent[index];
-    if (tabContent.classList.contains(Accordion.CLASS_TAB_EXPANDED)) {
-      this.closeTab(index);
-      return;
-    }
-
-    this.openTab(index);
-  }
 
   private openTab(index: number) {
     const tab = this.tabs[index];
@@ -142,9 +156,9 @@ export default class Accordion {
     const tab = this.tabs[index];
     const tabContent = this.tabsContent[index];
 
-    tab.classList.toggle(Accordion.CLASS_TAB_EXPANDED);
-    tabContent.classList.toggle(Accordion.CLASS_TAB_EXPANDED);
-    tabContent.classList.toggle(Accordion.CLASS_UTILITY_NONE);
+    tab.classList.remove(Accordion.CLASS_TAB_EXPANDED);
+    tabContent.classList.remove(Accordion.CLASS_TAB_EXPANDED);
+    tabContent.classList.add(Accordion.CLASS_UTILITY_NONE);
     tabContent.setAttribute('aria-hidden', "true");
     tabContent.setAttribute('aria-expanded', "false");
   }

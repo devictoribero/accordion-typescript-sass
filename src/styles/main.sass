@@ -4,13 +4,16 @@
 @import '_utilities'
 @import '_accordion/component'
 
-$background-image: 'https://www.setaswall.com/wp-content/uploads/2017/06/Blur-Wallpapers-21-1920-x-1200.jpg'
+$body-background-image: 'https://www.setaswall.com/wp-content/uploads/2017/06/Blur-Wallpapers-21-1920-x-1200.jpg'
+$body-background-color: #4C4A48
+
 html, body
   height: 100%
+  background: $body-background-color
 
 body
   display: flex
-  background: url($background-image)
+  background: url($body-background-image)
   background-size: cover
   flex-direction: column
   padding: 30px

@@ -4,15 +4,17 @@ $accordionTab-color: $color-white
 $accordionTab-border-color: darken($color-main-color, 20%)
 
 .#{$accordionTab}
+  position: relative
   font-family: $font-family-main
   background: $accordionTab-bg-color
   color: $accordionTab-color
   padding: 20px 25px
   font-weight: $font-weight-l
   font-size: $font-size-m
+  border-top: 1px solid $accordionTab-border-color
 
-  &:not(:last-child)
-    border-bottom: 1px solid $accordionTab-border-color
+  &:focus
+    outline-color: $accordionTab-border-color
 
   &:hover
     cursor: pointer

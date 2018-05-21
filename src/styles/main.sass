@@ -58,7 +58,25 @@ body
     border-radius: 5px
     padding: 15px
     box-sizing: border-box
-    border: 1px solid #e0e1e2
+    border: 1px solid $color-grey-light
+
+  .AddSectionForm-icons-wrapper
+    display: flex
+    flex-wrap: wrap
+    i
+      display: block
+      padding: 10px
+      margin: 5px
+      border-radius: 5px
+      color: $color-grey
+      &:hover, &:focus
+        cursor: pointer
+        background: lighten($color-grey-light, 5%)
+        outline-color: $color-grey
+      &.is-selected
+        background: $color-grey-light
+
+
 
   .AddSectionForm-actionBar
     margin-top: 20px

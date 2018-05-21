@@ -26,9 +26,10 @@ form.addEventListener('submit', event => {
     'AddSectionForm-input--tabcontext'
   )[0].value;
 
-  accordion.addTab(tabText, tabContextText);
+  const iconSelected = form.querySelector('i.is-selected');
+  console.log(iconSelected.dataset.class);
+  accordion.addTab(tabText, tabContextText, iconSelected.dataset.class);
   form.classList.add('u-none');
-
 });
 
 // Cancel the FORM
@@ -41,3 +42,17 @@ for (let i = 0, n = formOpeners.length; i < n; i++) {
     form.classList.add('u-none');
   });
 }
+
+const iconWrapper = form.getElementsByClassName('AddSectionForm-icons-wrapper')[0];
+iconWrapper.addEventListener('click', (event: MouseEvent) => {
+  const elementClicked = event.target;
+  if (elementClicked && elementClicked.tagName === 'I') {
+    const icons = iconWrapper.querySelectorAll('i');
+    for (let i = 0, n = icons.length; i < n; i++) {
+      icons[i].classList.remove('is-selected');
+      icons[i].setAttribute('aria-selected', 'false');
+    }
+    elementClicked.classList.add('is-selected');
+    elementClicked.setAttribute('aria-selected', 'true');
+  }
+});

@@ -178,8 +178,8 @@ export default class Accordion {
     return this.getExpandedTabs().length > 0;
   }
 
-  addTab(tabText: string, tabContentText: string, icon: string = null) {
-    const tab = this.createTabStructure(tabText, icon);
+  addTab(tabText: string, tabContentText: string, iconClass: string = '') {
+    const tab = this.createTabStructure(tabText, iconClass);
     const tabContent = this.createTabContentStructure(tabContentText);
 
     this.tabs.push(tab);
@@ -189,11 +189,15 @@ export default class Accordion {
     this.root.appendChild(tabContent);
   }
 
-  private createTabStructure(tabText: string, icon: string) {
+  private createTabStructure(tabText: string, iconClass: string) {
+    const iconToCreate = document.createElement('i');
+    iconToCreate.className += `Accordion-tabIcon ${iconClass}`;
+
     const tabToCreate = document.createElement('dt');
     const numExistingTabs = this.getTabs().length;
 
-    tabToCreate.appendChild(document.createTextNode(tabText));
+    tabToCreate.appendChild(iconToCreate);
+    tabToCreate.innerHTML += tabText;
     tabToCreate.id = `accordion-section-header-${numExistingTabs + 1}`;
     tabToCreate.classList.add(this.CLASS_TAB);
     tabToCreate.setAttribute('role', 'tab');

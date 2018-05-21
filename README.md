@@ -1,6 +1,16 @@
 # accordion-typescript-sass
 This is an accordion made with Vanilla Javascript, Ecmascript6, Typescript and sass preprocessor.
   
+## Prerequisits
+- Yarn
+
+- Node version >= 6.11.5
+
+> To get a version of node you can use nvm: https://github.com/creationix/nvm#install-script
+>
+> Once it is installed run:
+>
+> `nvm install 8.12` 
   
 ## Installation
 To install the accordion you need yarn installed in your computer.

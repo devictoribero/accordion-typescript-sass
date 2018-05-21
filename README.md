@@ -8,6 +8,8 @@ To install yarn run `sudo apt-get install yarn`
 
 Once you have yarn installed run: `yarn install`
 
+To run the project: `npm start`
+
 ## Previous concepts
 
 - Ecmascript 6: http://es6-features.org/#Constants

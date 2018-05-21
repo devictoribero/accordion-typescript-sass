@@ -1,0 +1,23 @@
+$Social: Social
+$SocialLink: Social-link
+
+.#{$Social}
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  display: flex
+  justify-content: flex-end
+  padding: 10px 30px
+
+  .#{$SocialLink}
+    color: $color-white
+    font-size: $font-size-l
+    &:not(:first-child)
+      margin-left: 10px
+
+@media (min-width: 768px)
+  .#{$Social}
+    padding: 30px
+    .#{$SocialLink}
+      font-size: $font-size-xl

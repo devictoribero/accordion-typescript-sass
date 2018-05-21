@@ -66,7 +66,6 @@ export default class Accordion {
   }
 
   private subscribeTabs() {
-
     this.root.addEventListener(
       'click',
       (event: MouseEvent) => this.handleClick(event)
@@ -178,4 +177,54 @@ export default class Accordion {
   private isAnyTabExpanded() {
     return this.getExpandedTabs().length > 0;
   }
+
+  addTab(tabText: string, tabContentText: string, icon: string = null) {
+    const tab = this.createTabStructure(tabText, icon);
+    const tabContent = this.createTabContentStructure(tabContentText);
+
+    this.tabs.push(tab);
+    this.tabsContent.push(tabContent);
+
+    this.root.appendChild(tab);
+    this.root.appendChild(tabContent);
+  }
+
+  private createTabStructure(tabText: string, icon: string) {
+    const tabToCreate = document.createElement('dt');
+    const numExistingTabs = this.getTabs().length;
+
+    tabToCreate.appendChild(document.createTextNode(tabText));
+    tabToCreate.id = `accordion-section-header-${numExistingTabs + 1}`;
+    tabToCreate.classList.add(this.CLASS_TAB);
+    tabToCreate.setAttribute('role', 'tab');
+    tabToCreate.setAttribute('aria-selected', 'false');
+    tabToCreate.setAttribute(
+      'aria-controls', `accordion-section-body-${numExistingTabs + 1}`
+    );
+    tabToCreate.setAttribute('tabindex', '0');
+
+    return tabToCreate;
+  }
+
+  private createTabContentStructure(tabContentText: string) {
+    const tabContentToCreate = document.createElement('dd');
+    const paragraph = document.createElement('p');
+    const numExistingTabs = this.getTabs().length;
+
+    paragraph.appendChild(document.createTextNode(tabContentText));
+
+    tabContentToCreate.id = `accordion-section-body-${numExistingTabs + 1}`;
+    tabContentToCreate.classList.add(this.CLASS_TAB_CONTENT, this.CLASS_UTILITY_NONE);
+    tabContentToCreate.setAttribute('role', 'tabpanel');
+    tabContentToCreate.setAttribute('aria-hidden', 'true');
+    tabContentToCreate.setAttribute('aria-expanded', 'false');
+    tabContentToCreate.setAttribute(
+      'aria-labelledby', `accordion-section-header-${numExistingTabs + 1}`
+    );
+
+    tabContentToCreate.appendChild(paragraph);
+
+    return tabContentToCreate;
+  }
+
 }

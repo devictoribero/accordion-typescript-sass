@@ -6,7 +6,7 @@ This is an accordion made with Vanilla Javascript, Ecmascript6, Typescript and s
 
 - Node version >= 6.11.5
 
-> To get a version of node you can use nvm: https://github.com/creationix/nvm#install-script
+> To get a version of node you can use [nvm](https://github.com/creationix/nvm#install-script)
 >
 > Once it is installed run:
 >
@@ -22,11 +22,11 @@ To run the project: `npm start`
 
 ## Previous concepts
 
-- Ecmascript 6: http://es6-features.org/#Constants
+- [Ecmascript 6 documentation](http://es6-features.org/#Constants)
 
-- Typescript: https://www.typescriptlang.org/docs/home.html
+- [Typescript documentation](https://www.typescriptlang.org/docs/home.html)
 
-- Sass Preprocessor: https://sass-lang.com/guide
+- [Sass Preprocessor documentation](https://sass-lang.com/guide)
 
 
 ## Usage

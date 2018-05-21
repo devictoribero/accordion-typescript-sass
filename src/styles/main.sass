@@ -20,6 +20,62 @@ body
   justify-content: flex-start
   box-sizing: border-box
 
+.Button-openForm
+  position: fixed
+  z-index: 998
+  font-family: $font-family-main
+  bottom: 0
+  left: 0
+  right: 0
+  background: #27ae60
+  border: none
+  color: $color-white
+  padding: 20px 0
+  width: 100%
+  font-size: $font-size-l
+  font-weight: $font-weight-l
+
+.AddSectionForm
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  background: white
+  z-index: 999
+  padding: 20px
+
+  .AddSectionForm-label
+    font-family: $font-family-main
+    font-weight: $font-weight-s
+    display: block
+    &:not(:first-child)
+      margin-top: 20px
+
+  .AddSectionForm-input
+    width: 100%
+    margin-top: 5px
+    border-radius: 5px
+    padding: 15px
+    box-sizing: border-box
+    border: 1px solid #e0e1e2
+
+  .AddSectionForm-actionBar
+    margin-top: 20px
+
+  .AddSectionForm-actionBarButton
+    font-family: $font-family-main
+    border: none
+    color: $color-white
+    padding: 10px 20px
+    font-size: $font-size-m
+    font-weight: $font-weight-m
+    border-radius: 5px
+  .AddSectionForm-actionBarButton--cancel
+    background: $color-grey
+  .AddSectionForm-actionBarButton--submit
+    background: #27ae60
+
 @media (min-width: 768px)
   #example1-wrapper
     width: 500px

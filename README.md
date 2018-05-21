@@ -1,11 +1,21 @@
 # accordion-typescript-sass
 This is an accordion made with Vanilla Javascript, Ecmascript6, Typescript and sass preprocessor.
   
+  
 ## Installation
 To install the accordion you need yarn installed in your computer.
 To install yarn run `sudo apt-get install yarn`
 
 Once you have yarn installed run: `yarn install`
+
+## Previous concepts
+
+- Ecmascript 6: http://es6-features.org/#Constants
+
+- Typescript: https://www.typescriptlang.org/docs/home.html
+
+- Sass Preprocessor: https://sass-lang.com/guide
+
 
 ## Usage
 To use the accordion it has to be well formed.
